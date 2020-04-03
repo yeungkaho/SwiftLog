@@ -1,0 +1,25 @@
+PODS:
+  - CollectionKit (2.4.0):
+    - CollectionKit/Core (= 2.4.0)
+  - CollectionKit/Core (2.4.0)
+  - Log (0.0.1):
+    - CollectionKit
+
+DEPENDENCIES:
+  - Log (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - CollectionKit
+
+EXTERNAL SOURCES:
+  Log:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CollectionKit: 8f01e7629185bb81072c4aa734d105df5c2d1c8b
+  Log: 47983274a79a1877477b6dca0c40fc4ea5a70ff1
+
+PODFILE CHECKSUM: 6d14687ca823c2d008b38aa82923e1b0ff031884
+
+COCOAPODS: 1.9.1
