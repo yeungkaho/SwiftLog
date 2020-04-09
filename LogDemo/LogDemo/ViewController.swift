@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Log
-
 class ViewController: UIViewController {
 
     var window: UIWindow?

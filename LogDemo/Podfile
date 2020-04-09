@@ -6,5 +6,5 @@ target 'LogDemo' do
   use_frameworks!
 
   # Pods for LogDemo
-  pod 'Log', :path => '../'
+#  pod 'Log', :path => '../'
 end

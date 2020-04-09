@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Log
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

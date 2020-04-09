@@ -13,37 +13,34 @@ import Foundation
 
 #if canImport(Log)
 import Log
+#endif
 
-@inline(__always) func SetupLoggingConsole() {
-    EnableFloatingButton(true)
-}
-
-@inline(__always) func DebugLog(_ message: String) {
-    Log(message, category: "Debug")
-}
-
-@inline(__always) func HelloLog(_ message: String) {
-    Log(message, category: "Hello")
-}
-
-#else
 
 /*
  * If we don't link the framework, theoretically these inline functions
- * will be optimized away by the compiler leaving no impact on final performance
+ * will be optimized away by the compiler in release settings
+ * leaving no impact on final performance
  */
-@inline(__always) func SetupLoggingConsole() {}
+
+@inline(__always) func SetupLoggingConsole() {
+    #if canImport(Log)
+    EnableFloatingButton(true)
+    #endif
+}
+
+@inline(__always) func ConsoleLog(_ message: String, category: String = "Default") {
+    #if DEBUG
+    print("[\(category)]" + message)
+    #endif
+    #if canImport(Log)
+    Log(message, category: category)
+    #endif
+}
 
 @inline(__always) func DebugLog(_ message: String) {
-    #if DEBUG
-    print(message)
-    #endif
-}
-@inline(__always) func IAPLog(_ message: String) {
-    #if DEBUG
-    print(message)
-    #endif
+    ConsoleLog(message, category: "Debug")
 }
 
-
-#endif
+@inline(__always) func HelloLog(_ message: String) {
+    ConsoleLog(message, category: "Hello")
+}
