@@ -1,3 +1,25 @@
-PODFILE CHECKSUM: 81a4c9a5dafa8c53fb377ec6ff869aecbd5fb990
+PODS:
+  - CollectionKit (2.4.0):
+    - CollectionKit/Core (= 2.4.0)
+  - CollectionKit/Core (2.4.0)
+  - Log (0.0.1):
+    - CollectionKit
 
-COCOAPODS: 1.9.1
+DEPENDENCIES:
+  - Log (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - CollectionKit
+
+EXTERNAL SOURCES:
+  Log:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CollectionKit: 8f01e7629185bb81072c4aa734d105df5c2d1c8b
+  Log: 0ee645ba803d5a2eb222f7edcc6dd01d75dd02b5
+
+PODFILE CHECKSUM: 6d14687ca823c2d008b38aa82923e1b0ff031884
+
+COCOAPODS: 1.9.3

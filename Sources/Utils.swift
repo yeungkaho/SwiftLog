@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension CGRect{
+internal extension CGRect{
     
     var x: CGFloat {
         get { return minX }
@@ -74,25 +74,25 @@ extension CGRect{
     //Corner points
     //TODO: setters
     var topLeft: CGPoint {
-        get { return [left, top] }
+        get { CGPoint(left, top)  }
     }
     
     var topRight: CGPoint {
-        get { return [right, top] }
+        get { CGPoint(right, top) }
     }
     
     var bottomLeft: CGPoint {
-        get { return [left, bottom] }
+        get { CGPoint(left, bottom) }
     }
     
     var bottomRight: CGPoint {
-        get { return [right, bottom] }
+        get { CGPoint(right, bottom) }
     }
     
 }
 
 
-extension UIView {
+internal extension UIView {
     
     var x: CGFloat {
         get { return frame.x }
@@ -157,13 +157,16 @@ extension UIView {
 }
 
 
-extension CGFloat {
+internal extension CGFloat {
     func clamp(_ a: CGFloat, _ b: CGFloat) -> CGFloat {
         return self < a ? a : (self > b ? b : self)
     }
 }
 
-extension CGPoint {
+internal extension CGPoint {
+    init(_ x:CGFloat,_ y:CGFloat) {
+        self.init(x:x,y:y)
+    }
     func translate(_ dx: CGFloat, dy: CGFloat) -> CGPoint {
         return CGPoint(x: self.x+dx, y: self.y+dy)
     }
@@ -252,92 +255,39 @@ extension CGRect {
     init(center: CGPoint, size: CGSize) {
         self.init(origin: center - size / 2, size: size)
     }
-}
-
-
-fileprivate func fill<T>(_ array: [T], toTargetCount count:Int, withValue value:T) -> [T] {
-    if array.count >= count {
-        return array
-    } else {
-        return array + (0..<(count-array.count)).map{ _ in value }
-    }
-}
-
-extension CGRect: ExpressibleByArrayLiteral {
     init(_ origin:CGPoint,_ size:CGSize) {
         self.init(origin:origin,size:size)
     }
     init(_ x:CGFloat,_ y:CGFloat,_ width:CGFloat,_ height:CGFloat) {
         self.init(x:x,y:y,width:width,height:height)
     }
-    public init(arrayLiteral elements: CGFloat...) {
-        let numbers = fill(elements, toTargetCount: 4, withValue: 0)
-        self.init(x: numbers[0], y: numbers[1], width:numbers[2], height:numbers[3])
-    }
 }
 
-extension CGPoint: ExpressibleByArrayLiteral {
-    init(_ x:CGFloat,_ y:CGFloat) {
-        self.init(x:x,y:y)
-    }
-    public init(arrayLiteral elements: CGFloat...) {
-        let numbers = fill(elements, toTargetCount: 2, withValue: 0)
-        self.init(x: numbers[0], y: numbers[1])
-    }
-}
 
-extension CGSize: ExpressibleByArrayLiteral {
+
+extension CGSize{
     init(_ width:CGFloat,_ height:CGFloat) {
         self.init(width:width,height:height)
     }
-    public init(arrayLiteral elements: CGFloat...) {
-        let numbers = fill(elements, toTargetCount: 2, withValue: 0)
-        self.init(width: numbers[0], height: numbers[1])
-    }
 }
 
-extension CGVector: ExpressibleByArrayLiteral {
+extension CGVector {
     init(_ dx:CGFloat,_ dy:CGFloat) {
         self.init(dx:dx,dy:dy)
-    }
-    public init(arrayLiteral elements: CGFloat...) {
-        let numbers = fill(elements, toTargetCount: 2, withValue: 0)
-        self.init(dx: numbers[0], dy: numbers[1])
     }
 }
 
 #if os(iOS)
 
-extension UIEdgeInsets: ExpressibleByArrayLiteral {
+extension UIEdgeInsets {
     init(_ top:CGFloat,_ left:CGFloat,_ bottom:CGFloat,_ right:CGFloat) {
         self.init(top:top,left:left,bottom:bottom,right:right)
-    }
-    public init(arrayLiteral elements: CGFloat...) {
-        let numbers = fill(elements, toTargetCount: 4, withValue: 0)
-        self.init(top: numbers[0], left: numbers[1], bottom:numbers[2], right:numbers[3])
-    }
-}
-
-extension UIEdgeInsets: ExpressibleByFloatLiteral {
-    public typealias FloatLiteralType = Double
-    public init(floatLiteral value: Double) {
-        let value = CGFloat(value)
-        self.init(top:value,left:value,bottom:value,right:value)
-    }
-}
-
-extension UIEdgeInsets: ExpressibleByIntegerLiteral {
-    public typealias IntegerLiteralType = Int
-    
-    public init(integerLiteral value: Int) {
-        let value = CGFloat(value)
-        self.init(top:value,left:value,bottom:value,right:value)
     }
 }
 
 #endif
 
-extension UIColor {
+internal extension UIColor {
     
     typealias Hex32 = UInt32
     /**

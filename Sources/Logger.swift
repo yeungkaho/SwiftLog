@@ -141,10 +141,10 @@ public class Logger {
             if let current = self.currentShowingWindow {
                 current.dismiss()
             } else {
-                let consoleModalView = ConsoleWindow(frame: [0,
-                                                             0,
-                                                             UIScreen.main.bounds.size.width - 32,
-                                                             UIScreen.main.bounds.size.height * 0.8])
+                let consoleModalView = ConsoleWindow(frame: CGRect(0,
+                                                                   0,
+                                                                   UIScreen.main.bounds.size.width - 32,
+                                                                   UIScreen.main.bounds.size.height * 0.8))
                 consoleModalView.show()
                 self.currentShowingWindow = consoleModalView
             }

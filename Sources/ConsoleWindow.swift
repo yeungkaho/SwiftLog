@@ -21,7 +21,7 @@ class ConsoleWindow: ModalView {
     func scrollToBottomIfNeeded(animated:Bool = false) {
         if !scrollLockSwitch.isOn, textView.bounds.height < textView.contentSize.height {
             textView.layoutManager.ensureLayout(for: textView.textContainer)
-            textView.setContentOffset([0, textView.contentSize.height - textView.frame.size.height],
+            textView.setContentOffset(CGPoint(0, textView.contentSize.height - textView.frame.size.height),
                                       animated: animated)
         }
     }
@@ -45,7 +45,7 @@ class ConsoleWindow: ModalView {
         textView.backgroundColor = UIColor(hexRGB: 0x13773D)
         textView.textColor = UIColor(hexRGB: 0xFFF0A5)
         textView.isEditable = false
-        textView.contentInset = [60]
+        textView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
         textView.font = UIFont(name: "CourierNewPS-BoldMT", size: 12)
         textView.alwaysBounceVertical = true
         
@@ -156,7 +156,7 @@ class ConsoleWindow: ModalView {
                                                                  options: [.usesLineFragmentOrigin,.usesFontLeading],
                                                                  attributes: [NSAttributedString.Key.font:UIFont(name: "CourierNewPS-BoldMT", size: 12)!],
                                                                  context: nil)
-                return [rect.width + 8, self.categoriesCollectionView.height]
+                return CGSize(rect.width + 8, self.categoriesCollectionView.height)
             },
             layout: tabsLayout,
             tapHandler: {
@@ -184,7 +184,7 @@ class ConsoleWindow: ModalView {
         scrollLockSwitch.right = width - 16
         scrollLockSwitch.top = 16
         
-        categoriesCollectionView.frame = [dismissButton.right + 16, 16, scrollLockSwitch.left - dismissButton.right - 32, 32]
+        categoriesCollectionView.frame = CGRect(dismissButton.right + 16, 16, scrollLockSwitch.left - dismissButton.right - 32, 32)
         
         scrollToBottomIfNeeded(animated: false)
         
